@@ -1,0 +1,14 @@
+backend/.gradle/
+backend/gradle/
+backend/gradlew
+backend/gradlew.bat
+backend/.idea/
+backend/build/
+backend/bin/
+backend/*.iml
+backend/*.ipr
+backend/*.iws
+backend/src/main/resources/public/*
+frontend/node_modules/
+frontend/dist/
+

@@ -1,0 +1,42 @@
+buildscript {
+  ext {
+    springBootVersion = '1.5.1.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+  baseName = 'app-name'
+  version = '0.0.1'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+dependencies {
+  compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.springframework.boot:spring-boot-starter-data-jpa')
+  compile('org.springframework.boot:spring-boot-starter-security')
+  compile('org.springframework.boot:spring-boot-devtools:1.5.1.RELEASE')
+  compile('io.jsonwebtoken:jjwt:0.7.0')
+  compile('org.projectlombok:lombok:1.16.12')
+
+  runtime('org.postgresql:postgresql')
+  
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile("junit:junit")
+}
