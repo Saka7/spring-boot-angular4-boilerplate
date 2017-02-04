@@ -1,6 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-cd backend
-
-gradle build
-
+cd backend && gradle build
