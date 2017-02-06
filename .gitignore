@@ -8,6 +8,7 @@ backend/bin/
 backend/*.iml
 backend/*.ipr
 backend/*.iws
+backend/*db
 backend/src/main/resources/public/*
 frontend/node_modules/
 frontend/dist/

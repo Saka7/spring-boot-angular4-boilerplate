@@ -37,6 +37,10 @@ public class AuthController extends BaseController {
     @Value("${auth.header}")
     private String tokenHeader;
 
+    public final static String SIGNUP_URL = "/api/auth/signup";
+    public final static String SIGNIN_URL = "/api/auth/signin";
+    public final static String REFRESH_TOKEN_URL = "/api/auth/token/refresh";
+
     private AuthenticationManager authenticationManager;
     private JwtTokenUtil jwtTokenUtil;
     private UserDetailsService userDetailsService;
@@ -67,10 +71,7 @@ public class AuthController extends BaseController {
         return new BCryptPasswordEncoder();
     }
 
-    @RequestMapping(
-        value = "api/auth/signup",
-        method = RequestMethod.POST
-    )
+    @RequestMapping(value = SIGNUP_URL, method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
@@ -100,10 +101,7 @@ public class AuthController extends BaseController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(
-        value = "api/auth/signin",
-        method = RequestMethod.POST
-    )
+    @RequestMapping(value = SIGNIN_URL, method = RequestMethod.POST)
     public ResponseEntity<?> getAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
@@ -131,10 +129,7 @@ public class AuthController extends BaseController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(
-        value = "api/auth/token/refresh",
-        method = RequestMethod.POST
-    )
+    @RequestMapping(value = REFRESH_TOKEN_URL, method = RequestMethod.POST)
     public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         LOG.info("[POST] REFRESH TOKEN FOR User " + token);

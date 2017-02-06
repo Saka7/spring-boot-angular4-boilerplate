@@ -23,7 +23,7 @@ public class JwtUserDetailsServiceBean implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = null;
         try {
-            user = userRepository.findByUsername(username);
+            user = userRepository.findByName(username);
         } catch(Exception ex) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }
