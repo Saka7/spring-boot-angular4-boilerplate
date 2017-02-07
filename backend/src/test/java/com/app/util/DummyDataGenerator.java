@@ -13,7 +13,7 @@ public class DummyDataGenerator {
         List<User> users = new ArrayList<>();
         for (int i = idStarsFrom; i < amount + idStarsFrom; i++) {
             users.add(new User("random-name" + i,
-                    String.format("random@email.com", i),
+                    String.format("random%d@email.com", i),
                     "password" + i,
                     new Role(0L, "USER")));
             users.get(i - idStarsFrom).setId((long) i);
