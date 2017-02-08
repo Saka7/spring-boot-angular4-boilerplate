@@ -8,7 +8,6 @@ import java.util.List;
 
 public class DummyDataGenerator {
 
-    // Generates dummy users
     public static List<User> getUsers(int amount, int idStarsFrom) {
         List<User> users = new ArrayList<>();
         for (int i = idStarsFrom; i < amount + idStarsFrom; i++) {

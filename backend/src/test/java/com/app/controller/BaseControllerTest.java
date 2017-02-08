@@ -6,7 +6,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @WebAppConfiguration
-public abstract class AbstractControllerTest extends BaseTest {
+public abstract class BaseControllerTest extends BaseTest {
 
     protected MockMvc mvc;
 

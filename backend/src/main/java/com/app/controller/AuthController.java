@@ -79,11 +79,12 @@ public class AuthController extends BaseController {
         String email = authenticationRequest.getEmail();
         String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
-        Role role  = new Role("USER");
+        Role role  = new Role(1L, "USER");
         userService.save(new User(name, email, password, role));
         JwtUser userDetails;
+
         try {
-            userDetails = (JwtUser) this.userDetailsService.loadUserByUsername(name);
+            userDetails = (JwtUser) userDetailsService.loadUserByUsername(name);
         } catch (UsernameNotFoundException ex) {
             LOG.error(ex.getMessage());
             throw new UserNotFoundException();
@@ -109,6 +110,7 @@ public class AuthController extends BaseController {
         String password = authenticationRequest.getPassword();
         LOG.info("[POST] GETTING TOKEN FOR User " + name);
         JwtUser userDetails;
+
         try {
             userDetails = (JwtUser) userDetailsService.loadUserByUsername(name);
         } catch (UsernameNotFoundException | NoResultException ex) {
@@ -118,12 +120,15 @@ public class AuthController extends BaseController {
             LOG.error(ex.getMessage());
             return new ResponseEntity<>(ex, HttpStatus.BAD_REQUEST);
         }
+
         if(!passwordEncoder().matches(password, userDetails.getPassword())) {
             throw new InvalidPasswordException();
         }
+
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(name, password)
         );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));

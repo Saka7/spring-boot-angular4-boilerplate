@@ -30,7 +30,7 @@ import java.util.Collections;
 import static com.app.util.DummyDataGenerator.getUsers;
 import static com.app.util.JsonMapper.toJson;
 
-public class AuthControllerTest extends AbstractControllerTest {
+public class AuthControllerTest extends BaseControllerTest {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;

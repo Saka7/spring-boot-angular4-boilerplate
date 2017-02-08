@@ -13,11 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-
-jar {
-  baseName = 'app-name'
-  version = '0.0.1'
-}
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -42,3 +38,22 @@ dependencies {
 
   testRuntime('com.h2database:h2:1.4.193')
 }
+
+jar {
+    baseName = 'app-name'
+    version = '0.0.1'
+}
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = false
+        csv.enabled = false
+        html.enabled = true
+    }
+}
+
+test.finalizedBy jacocoTestReport
