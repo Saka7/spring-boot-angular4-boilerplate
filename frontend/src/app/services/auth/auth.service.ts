@@ -7,8 +7,7 @@ import {
   Response
 } from '@angular/http';
 
-import { Observable } from 'rxjs';
-import { ReplaySubject } from 'rxjs/Rx';
+import { Observable, ReplaySubject} from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -24,11 +23,8 @@ export class AuthService extends ReplaySubject<string> {
   
   constructor(private http: Http) {
     super();
-    if(!!sessionStorage.getItem('user')) {
-      let user = JSON.parse(sessionStorage.getItem('user'));
-      if(user) {
-        this.saveUserDetails(user);
-      }
+    if(sessionStorage.getItem('user')) {
+      this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
     }
   }
 
@@ -83,6 +79,9 @@ export class AuthService extends ReplaySubject<string> {
       requestParam, this.generateOptions())
         .map((res: Response) => {
            this.saveToken(res);
+        })
+        .catch(error => {
+          throw Error(error.json() && error.json().message);
         });
   }
 
@@ -104,13 +103,12 @@ export class AuthService extends ReplaySubject<string> {
 
   private saveToken(res: Response) {
     let response = res.json() && res.json().token;
-    if (!!response) {
+    if (response) {
       let token = response;
       let claims = this.getTokenClaims(token);
       claims.token = token;
       sessionStorage.setItem('user', JSON.stringify(claims));
     } else {
-      console.error(res.json());
       throw Error(res.json());
     }
   }
