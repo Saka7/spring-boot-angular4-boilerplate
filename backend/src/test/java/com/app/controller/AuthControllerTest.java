@@ -6,12 +6,10 @@ import com.app.security.auth.JwtAuthenticationResponse;
 import com.app.security.auth.JwtTokenUtil;
 import com.app.security.auth.JwtUser;
 import com.app.service.UserService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,12 +21,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collections;
 
 import static com.app.util.DummyDataGenerator.getUsers;
 import static com.app.util.JsonMapper.toJson;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 public class AuthControllerTest extends BaseControllerTest {
 
@@ -62,7 +62,7 @@ public class AuthControllerTest extends BaseControllerTest {
     }
 
     @Test(timeout=1000)
-    public void signupTest() throws Exception {
+    public void signUpTest() throws Exception {
         User user = getUsers(1).get(0);
         JwtUser jwtUser = new JwtUser(0L, user.getName(), user.getEmail(), user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getLabel())));
@@ -73,20 +73,18 @@ public class AuthControllerTest extends BaseControllerTest {
 
         JwtAuthenticationResponse expectedResponse = new JwtAuthenticationResponse(TOKEN);
 
-        Mockito.when(userService.save(Mockito.any(User.class))).thenReturn(user);
+        when(userService.save(any(User.class))).thenReturn(user);
 
-        Mockito.when(userDetailsService.loadUserByUsername(Mockito.anyString()))
+        when(userDetailsService.loadUserByUsername(anyString()))
                 .thenReturn(jwtUser);
 
-        Mockito.when(jwtTokenUtil.generateToken(Mockito.any(UserDetails.class)))
+        when(jwtTokenUtil.generateToken(any(UserDetails.class)))
                 .thenReturn(TOKEN);
 
-        Mockito.when(authenticationManager
-                .authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(Mockito.any(Authentication.class));
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(any(Authentication.class));
 
-        MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .post(AuthController.SIGNUP_URL)
+        MvcResult result = mvc.perform(post(AuthController.SIGNUP_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(toJson(request)))
@@ -95,22 +93,19 @@ public class AuthControllerTest extends BaseControllerTest {
         String content = result.getResponse().getContentAsString();
         int status = result.getResponse().getStatus();
 
-        Mockito.verify(userService, Mockito.times(1)).save(Mockito.any(User.class));
-        Mockito.verify(userDetailsService, Mockito.times(1))
-                .loadUserByUsername(Mockito.anyString());
-        Mockito.verify(jwtTokenUtil, Mockito.times(1))
-                .generateToken(Mockito.any(UserDetails.class));
-        Mockito.verify(authenticationManager, Mockito.times(1))
-                .authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
+        verify(userService, times(1)).save(any(User.class));
+        verify(userDetailsService, times(1)).loadUserByUsername(anyString());
+        verify(jwtTokenUtil, times(1)).generateToken(any(UserDetails.class));
+        verify(authenticationManager, times(1)).authenticate(any(UsernamePasswordAuthenticationToken.class));
 
-        Assert.assertEquals("Expected HTTP status 200", 200, status);
-        Assert.assertNotNull("Token shouldn't be NULL", content);
-        Assert.assertTrue("Content shouldn't be empty", content.trim().length() > 0);
-        Assert.assertEquals("Should return appropriate token", expectedResponse.toString(), content);
+        assertEquals("Expected HTTP status 200", 200, status);
+        assertNotNull("Token shouldn't be NULL", content);
+        assertTrue("Content shouldn't be empty", content.trim().length() > 0);
+        assertEquals("Should return appropriate token", expectedResponse.toString(), content);
     }
 
     @Test(timeout=10000)
-    public void signinTest() throws Exception {
+    public void signInTest() throws Exception {
         User user = getUsers(1).get(0);
 
         String password = passwordEncoder.encode(user.getPassword());
@@ -122,18 +117,12 @@ public class AuthControllerTest extends BaseControllerTest {
 
         JwtAuthenticationResponse expectedResponse = new JwtAuthenticationResponse(TOKEN);
 
-        Mockito.when(userDetailsService.loadUserByUsername(Mockito.anyString()))
-                .thenReturn(jwtUser);
+        when(userDetailsService.loadUserByUsername(anyString())).thenReturn(jwtUser);
+        when(jwtTokenUtil.generateToken(any(UserDetails.class))).thenReturn(TOKEN);
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(any(Authentication.class));
 
-        Mockito.when(jwtTokenUtil.generateToken(Mockito.any(UserDetails.class)))
-                .thenReturn(TOKEN);
-
-        Mockito.when(authenticationManager
-                .authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(Mockito.any(Authentication.class));
-
-        MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .post(AuthController.SIGNIN_URL)
+        MvcResult result = mvc.perform(post(AuthController.SIGNIN_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(toJson(request)))
@@ -142,25 +131,22 @@ public class AuthControllerTest extends BaseControllerTest {
         String content = result.getResponse().getContentAsString();
         int status = result.getResponse().getStatus();
 
-        Mockito.verify(userDetailsService, Mockito.times(1))
-                .loadUserByUsername(Mockito.anyString());
-        Mockito.verify(authenticationManager, Mockito.times(1))
-                .authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
+        verify(userDetailsService, times(1)).loadUserByUsername(anyString());
+        verify(authenticationManager, times(1)).authenticate(any(UsernamePasswordAuthenticationToken.class));
 
-        Assert.assertEquals("Expected HTTP status 200", 200, status);
-        Assert.assertNotNull("Token shouldn't be NULL", content);
-        Assert.assertTrue("Content shouldn't be empty", content.trim().length() > 0);
-        Assert.assertEquals("Should return appropriate token", expectedResponse.toString(), content);
+        assertEquals("Expected HTTP status 200", 200, status);
+        assertNotNull("Token shouldn't be NULL", content);
+        assertTrue("Content shouldn't be empty", content.trim().length() > 0);
+        assertEquals("Should return appropriate token", expectedResponse.toString(), content);
     }
 
     @Test(timeout=10000)
     public void refreshTest() throws Exception {
         JwtAuthenticationResponse expectedResponse = new JwtAuthenticationResponse(TOKEN);
 
-        Mockito.when(jwtTokenUtil.refreshToken(Mockito.anyString())).thenReturn(TOKEN);
+        when(jwtTokenUtil.refreshToken(anyString())).thenReturn(TOKEN);
 
-        MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .post(AuthController.REFRESH_TOKEN_URL)
+        MvcResult result = mvc.perform(post(AuthController.REFRESH_TOKEN_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(toJson(TOKEN)))
@@ -169,12 +155,12 @@ public class AuthControllerTest extends BaseControllerTest {
         String content = result.getResponse().getContentAsString();
         int status = result.getResponse().getStatus();
 
-        Mockito.verify(jwtTokenUtil, Mockito.times(1)).refreshToken(Mockito.anyString());
+        verify(jwtTokenUtil, times(1)).refreshToken(anyString());
 
-        Assert.assertEquals("Expected HTTP status 200", 200, status);
-        Assert.assertNotNull("Token shouldn't be NULL", content);
-        Assert.assertTrue("Content shouldn't be empty", content.trim().length() > 0);
-        Assert.assertEquals("Should return appropriate token", expectedResponse.toString(), content);
+        assertEquals("Expected HTTP status 200", 200, status);
+        assertNotNull("Token shouldn't be NULL", content);
+        assertTrue("Content shouldn't be empty", content.trim().length() > 0);
+        assertEquals("Should return appropriate token", expectedResponse.toString(), content);
     }
 
 }
