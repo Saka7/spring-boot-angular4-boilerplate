@@ -1,14 +1,15 @@
-import { TravelBestPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('travel-best App', function() {
-  let page: TravelBestPage;
+describe('app-name App', function() {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new TravelBestPage();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should ...', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getContainer()).toBeDefined();
   });
+  
 });
