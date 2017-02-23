@@ -36,3 +36,22 @@ Also you need to configure JWT secret in file listed above.
 - `npm test --prefix ./frontend` - to run front-end unit tests.
 - `npm run e2e --prefix ./frontend` - to run end to end tests.
 - `gradle -p ./backend test` - to run server tests.
+
+## Technologies used
+
+- [spring-boot 1.5.1](https://projects.spring.io/spring-boot/)
+- [spring-mvc 4.3.6](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
+- [spring-data-jpa 1.11.0](http://projects.spring.io/spring-data-jpa/)
+- [spring-security 4.2.1](https://projects.spring.io/spring-security/)
+- [jjwt 0.7.0](https://github.com/jwtk/jjwt)
+- [lombok 1.16.12](https://projectlombok.org/)
+- [junit 4.11](http://junit.org/junit4/)
+- [gradle 3.3](https://gradle.org/)
+- [postgresql 9.5](https://www.postgresql.org/)
+- [h2 1.4](http://www.h2database.com/html/main.html)
+- [angular-cli 1.0.0-beta.24](https://cli.angular.io/)
+- [angular 2.3.1](https://angular.io/)
+- [rxjs 5](http://reactivex.io/rxjs/)
+- [jasmine 2.5](https://jasmine.github.io/)
+- [karma 1.0](https://karma-runner.github.io/1.0/index.html)
+- [protractor 4](http://www.protractortest.org/#/)
