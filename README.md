@@ -50,7 +50,7 @@ Also you need to configure JWT secret in file listed above.
 - [postgresql 9.5](https://www.postgresql.org/)
 - [h2 1.4](http://www.h2database.com/html/main.html)
 - [angular-cli 1.0.0-beta.24](https://cli.angular.io/)
-- [angular 2.3.1](https://angular.io/)
+- [angular 2.4.8](https://angular.io/)
 - [rxjs 5](http://reactivex.io/rxjs/)
 - [jasmine 2.5](https://jasmine.github.io/)
 - [karma 1.0](https://karma-runner.github.io/1.0/index.html)
