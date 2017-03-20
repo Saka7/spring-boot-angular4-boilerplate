@@ -1,5 +1,8 @@
 # Spring Boot + Angular 2 Boilerplate
 
+[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate)
+[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate)
+
 Quick start for spring boot + angular 2 projects with JWT auth
 
 ## Includes:
