@@ -42,7 +42,7 @@ Also you need to configure JWT secret in file listed above.
 
 ## Technologies used
 
-- [spring-boot 1.5.1](https://projects.spring.io/spring-boot/)
+- [spring-boot 1.5.2](https://projects.spring.io/spring-boot/)
 - [spring-mvc 4.3.6](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
 - [spring-data-jpa 1.11.0](http://projects.spring.io/spring-data-jpa/)
 - [spring-security 4.2.1](https://projects.spring.io/spring-security/)
