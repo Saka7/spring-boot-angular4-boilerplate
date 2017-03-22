@@ -23,10 +23,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
@@ -67,12 +64,12 @@ public class AuthController extends BaseController {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @RequestMapping(value = SIGNUP_URL, method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
+    @PostMapping(SIGNUP_URL)
+    public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
         String name = authenticationRequest.getUsername();
@@ -102,8 +99,8 @@ public class AuthController extends BaseController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(value = SIGNIN_URL, method = RequestMethod.POST)
-    public ResponseEntity<?> getAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
+    @PostMapping(SIGNIN_URL)
+    public ResponseEntity getAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
         String name = authenticationRequest.getUsername();
@@ -126,7 +123,7 @@ public class AuthController extends BaseController {
         }
 
         final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(name, password)
+            new UsernamePasswordAuthenticationToken(name, password)
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -134,10 +131,10 @@ public class AuthController extends BaseController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(value = REFRESH_TOKEN_URL, method = RequestMethod.POST)
-    public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request) {
+    @PostMapping(REFRESH_TOKEN_URL)
+    public ResponseEntity refreshAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        LOG.info("[POST] REFRESH TOKEN FOR User " + token);
+        LOG.info("[POST] REFRESHING TOKEN");
         String refreshedToken = jwtTokenUtil.refreshToken(token);
         return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
     }
