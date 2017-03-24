@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -33,7 +33,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findOne(id);
+        if(userRepository.exists(id)) {
+            return userRepository.findOne(id);
+        } else {
+            throw new UserNotFoundException();
+        }
     }
 
     @Override
