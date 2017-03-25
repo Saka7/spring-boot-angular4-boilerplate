@@ -38,12 +38,21 @@ public class UserServiceTest extends BaseTest {
     @Test(timeout = 3000)
     public void findByIdTest() {
         User user = getUsers(1).get(0);
+        when(userRepository.exists(anyLong())).thenReturn(true);
         when(userRepository.findOne(anyLong())).thenReturn(user);
         User fetchedUser = userService.findById(1L);
 
         verify(userRepository, times(1)).findOne(anyLong());
         assertNotNull("Fetched user shouldn't be NULL", fetchedUser);
         assertEquals("Should return appropriate user", user, fetchedUser);
+    }
+    @Test(timeout = 3000, expected = UserNotFoundException.class)
+    public void findByIdNotExistsTest() {
+        User user = getUsers(1).get(0);
+        when(userRepository.exists(anyLong())).thenReturn(false);
+        when(userRepository.findOne(anyLong())).thenReturn(user);
+        userService.findById(1L);
+        verify(userRepository, times(1)).findOne(anyLong());
     }
 
     @Test(timeout = 5000)
