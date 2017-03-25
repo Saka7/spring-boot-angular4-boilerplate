@@ -1,9 +1,9 @@
-# Spring Boot + Angular 2 Boilerplate
+# Spring Boot + Angular 4 Boilerplate
 
-[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate)
-[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate)
+[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
+[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
 
-Quick start for spring boot + angular 2 projects with JWT auth
+Quick start for Spring Boot + angular 4 projects with JWT auth
 
 ## Includes:
 
@@ -52,9 +52,10 @@ Also you need to configure JWT secret in file listed above.
 - [gradle 3.3](https://gradle.org/)
 - [postgresql 9.5](https://www.postgresql.org/)
 - [h2 1.4](http://www.h2database.com/html/main.html)
-- [angular-cli 1.0.0-beta.24](https://cli.angular.io/)
-- [angular 2.4.8](https://angular.io/)
+- [angular-cli 1.0.0](https://cli.angular.io/)
+- [angular 4.0.0](https://angular.io/)
 - [rxjs 5](http://reactivex.io/rxjs/)
 - [jasmine 2.5](https://jasmine.github.io/)
 - [karma 1.0](https://karma-runner.github.io/1.0/index.html)
 - [protractor 4](http://www.protractortest.org/#/)
+
