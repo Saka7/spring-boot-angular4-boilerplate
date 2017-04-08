@@ -1,9 +1,9 @@
 # Spring Boot + Angular 4 Boilerplate
 
-[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
-[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular2-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
+[![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
+[![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
 
-Quick start for Spring Boot + angular 4 projects with JWT auth
+Quick start for Spring Boot + Angular 4 projects with JWT auth
 
 ## Includes:
 
