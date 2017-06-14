@@ -86,7 +86,9 @@ export class AuthService extends ReplaySubject<string> {
   }
 
   public isAuthorized(): boolean {
-    return !!this.userId || !!this.username || !!this.token;
+    return Boolean(this.userId) ||
+      Boolean(this.username) ||
+      Boolean(this.token);
   }
 
   public getUsername(): string {
