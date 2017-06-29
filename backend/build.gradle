@@ -31,7 +31,7 @@ dependencies {
   compile('io.jsonwebtoken:jjwt:0.7.0')
   compile('org.projectlombok:lombok:1.16.12')
 
-  runtime('org.postgresql:postgresql')
+  runtime('org.postgresql:postgresql:42.1.1')
   
   testCompile('org.springframework.boot:spring-boot-starter-test')
   testCompile("junit:junit")

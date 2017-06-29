@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JwtUserDetailsServiceBean implements UserDetailsService {
+public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -22,10 +22,15 @@ public class JwtUserDetailsServiceBean implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = null;
+        UsernameNotFoundException usernameNotFoundException = new UsernameNotFoundException(String.format("No user " +
+                "found with username '%s'.", username));
         try {
             user = userRepository.findByName(username);
+            if(user == null) {
+                throw usernameNotFoundException;
+            }
         } catch(Exception ex) {
-            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
+            throw usernameNotFoundException;
         }
 
         return JwtUserFactory.create(user);

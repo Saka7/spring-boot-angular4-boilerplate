@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +7,9 @@ import {
 })
 export class AppComponent implements OnInit {
   
-  ngOnInit() { }
+  constructor() {}
+
+  ngOnInit() {
+  }
 
 }

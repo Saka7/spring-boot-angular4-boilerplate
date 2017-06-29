@@ -77,7 +77,7 @@ public class AuthController extends BaseController {
         String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
         Role role  = new Role(1L, "USER");
-        userService.save(new User(name, email, password, role));
+        userService.save(new User(0L, name, email, password, role));
         JwtUser userDetails;
 
         try {

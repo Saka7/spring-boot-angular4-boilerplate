@@ -41,6 +41,11 @@ public class User implements Serializable {
         this.setRole(role);
     }
 
+    public User(Long id, String name, String email, String password, Role role) {
+        this(name, email, password, role);
+        this.setId(id);
+    }
+
     @JsonIgnore
     public String getPassword() {
         return this.password;
