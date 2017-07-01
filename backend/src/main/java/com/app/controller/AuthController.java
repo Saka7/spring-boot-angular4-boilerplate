@@ -6,7 +6,7 @@ import com.app.exception.InvalidPasswordException;
 import com.app.exception.UserNotFoundException;
 import com.app.security.auth.JwtAuthenticationRequest;
 import com.app.security.auth.JwtAuthenticationResponse;
-import com.app.security.auth.JwtTokenUtil;
+import com.app.security.auth.JwtUtil;
 import com.app.security.auth.JwtUser;
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * AuthController provides signup, signin and token refresh methods
+ * @author saka7
+ */
 @RestController
 public class AuthController extends BaseController {
 
@@ -39,25 +43,41 @@ public class AuthController extends BaseController {
     public final static String REFRESH_TOKEN_URL = "/api/auth/token/refresh";
 
     private AuthenticationManager authenticationManager;
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtil jwtUtil;
     private UserDetailsService userDetailsService;
     private UserService userService;
 
+    /**
+     * Injects AuthenticationManager instance
+     * @param authenticationManager to inject
+     */
     @Autowired
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * Injects JwtUtil instance
+     * @param jwtUtil to inject
+     */
     @Autowired
-    public void setJwtTokenUtil(JwtTokenUtil jwtTokenUtil) {
-        this.jwtTokenUtil = jwtTokenUtil;
+    public void setJwtTokenUtil(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
     }
 
+    /**
+     * Injects UserDetailsService instance
+     * @param userDetailsService to inject
+     */
     @Autowired
     public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Injects UserService instance
+     * @param userService to inject
+     */
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -68,6 +88,12 @@ public class AuthController extends BaseController {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Adds new user and returns authentication token
+     * @param authenticationRequest request with username, email and password fields
+     * @return generated JWT
+     * @throws AuthenticationException
+     */
     @PostMapping(SIGNUP_URL)
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
@@ -95,10 +121,16 @@ public class AuthController extends BaseController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = jwtTokenUtil.generateToken(userDetails);
+        final String token = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
+    /**
+     * Returns authentication token for given user
+     * @param authenticationRequest with username and password
+     * @return generated JWT
+     * @throws AuthenticationException
+     */
     @PostMapping(SIGNIN_URL)
     public ResponseEntity getAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
@@ -127,15 +159,20 @@ public class AuthController extends BaseController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = jwtTokenUtil.generateToken(userDetails);
+        final String token = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
+    /**
+     * Refreshes token
+     * @param request with old JWT
+     * @return Refreshed JWT
+     */
     @PostMapping(REFRESH_TOKEN_URL)
     public ResponseEntity refreshAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         LOG.info("[POST] REFRESHING TOKEN");
-        String refreshedToken = jwtTokenUtil.refreshToken(token);
+        String refreshedToken = jwtUtil.refreshToken(token);
         return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
     }
 

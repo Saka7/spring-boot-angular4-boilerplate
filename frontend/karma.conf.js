@@ -8,8 +8,9 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
-      require('karma-remap-istanbul'),
-      require('angular-cli/plugins/karma')
+      require('karma-jasmine-html-reporter'),
+      require('karma-coverage-istanbul-reporter'),
+      require('@angular/cli/plugins/karma')
     ],
     files: [
       { pattern: './src/test.ts', watched: false }
@@ -30,9 +31,13 @@ module.exports = function (config) {
       config: './angular-cli.json',
       environment: 'dev'
     },
+    frameworks: ['jasmine', '@angular/cli'],
     reporters: config.angularCli && config.angularCli.codeCoverage
-              ? ['progress', 'karma-remap-istanbul']
-              : ['progress'],
+                  ? ['progress', 'karma-remap-istanbul', 'kjhtml']
+                  : ['progress', 'kjhtml'],
+    preprocessors: {
+          './src/test.ts': ['@angular/cli']
+        },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

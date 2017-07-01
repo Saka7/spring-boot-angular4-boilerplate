@@ -11,8 +11,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Common helper methods to work with JWT
+ */
 @Component
-public class JwtTokenUtil implements Serializable {
+public class JwtUtil implements Serializable {
 
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_ID = "id";
@@ -25,6 +28,11 @@ public class JwtTokenUtil implements Serializable {
     @Value("${auth.expires}")
     private Long expiration;
 
+    /**
+     * Returns user id from given token
+     * @param token JSON Web Token
+     * @return user id
+     */
     public Long getUserIdFromToken(String token) {
         Long id = null;
         try {
@@ -36,6 +44,11 @@ public class JwtTokenUtil implements Serializable {
         return id;
     }
 
+    /**
+     * Returns username from given token
+     * @param token JSON Web Token
+     * @return username
+     */
     public String getUsernameFromToken(String token) {
         String username;
         try {
@@ -47,7 +60,12 @@ public class JwtTokenUtil implements Serializable {
         return username;
     }
 
-    public Date getCreatedDateFromToken(String token) {
+    /**
+     * Returns creation date from given token
+     * @param token JSON Web Token
+     * @return creation date
+     */
+    public Date getCreationDateFromToken(String token) {
         Date created;
         try {
             final Claims claims = getClaimsFromToken(token);
@@ -58,6 +76,11 @@ public class JwtTokenUtil implements Serializable {
         return created;
     }
 
+    /**
+     * Returns expiration date from given token
+     * @param token JSON Web Token
+     * @return expiration date
+     */
     public Date getExpirationDateFromToken(String token) {
         Date expiration;
         try {
@@ -69,6 +92,11 @@ public class JwtTokenUtil implements Serializable {
         return expiration;
     }
 
+    /**
+     * Generates JWT using userDetails
+     * @param userDetails used to generate JWT
+     * @return generated JWT
+     */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         JwtUser jwtUser = (JwtUser) userDetails;
@@ -79,6 +107,11 @@ public class JwtTokenUtil implements Serializable {
         return generateToken(claims);
     }
 
+    /**
+     * Refreshes JWT
+     * @param token old JWT
+     * @return refreshed JWT
+     */
     public String refreshToken(String token) {
         String refreshedToken;
         try {
@@ -91,6 +124,12 @@ public class JwtTokenUtil implements Serializable {
         return refreshedToken;
     }
 
+    /**
+     * Checks token validity
+     * @param token to check
+     * @param userDetails to compare with
+     * @return true if token valid else false
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
         final String username = getUsernameFromToken(token);

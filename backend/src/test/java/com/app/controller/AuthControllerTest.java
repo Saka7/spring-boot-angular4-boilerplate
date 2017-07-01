@@ -3,7 +3,7 @@ package com.app.controller;
 import com.app.entity.User;
 import com.app.security.auth.JwtAuthenticationRequest;
 import com.app.security.auth.JwtAuthenticationResponse;
-import com.app.security.auth.JwtTokenUtil;
+import com.app.security.auth.JwtUtil;
 import com.app.security.auth.JwtUser;
 import com.app.service.UserService;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class AuthControllerTest extends BaseControllerTest {
     private AuthenticationManager authenticationManager;
 
     @Mock
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtil jwtTokenUtil;
 
     @Mock
     private UserDetailsService userDetailsService;
