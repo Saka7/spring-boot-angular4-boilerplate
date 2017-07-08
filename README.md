@@ -27,8 +27,9 @@ Also you need to configure JWT secret in file listed above.
 
 1. Run `npm install --prefix ./frontend` to install front-end dependencies.
 2. Run `npm run build --prefix ./frontend` to build angular application.
-3. Run `gradle -p ./backend build` to build a spring boot application.
-4. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
+3. Run `./init_db` to create database, dbuser and dump default schema.
+4. Run `gradle -p ./backend build` to build a spring boot application.
+5. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
 
 > `npm start --prefix ./frontend` to start front-end server for development.
 
@@ -42,7 +43,7 @@ Also you need to configure JWT secret in file listed above.
 
 ## Technologies used
 
-- [spring-boot 1.5.2](https://projects.spring.io/spring-boot/)
+- [spring-boot 1.5.3](https://projects.spring.io/spring-boot/)
 - [spring-mvc 4.3.6](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
 - [spring-data-jpa 1.11.0](http://projects.spring.io/spring-data-jpa/)
 - [spring-security 4.2.1](https://projects.spring.io/spring-security/)
