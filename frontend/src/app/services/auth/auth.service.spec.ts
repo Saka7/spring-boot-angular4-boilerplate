@@ -42,7 +42,7 @@ describe('AuthService', () => {
 
   it('should return token if exists',
       inject([AuthService], (authService: AuthService) => {
-    authService.resresh();
+    authService.refresh();
     const retrievedToken = authService.getToken();
     expect(retrievedToken).toBeDefined();
     expect(retrievedToken).not.toBeNull();
@@ -52,14 +52,14 @@ describe('AuthService', () => {
   it('should return null if token does not exists',
       inject([AuthService], (authService: AuthService) => {
     store = {};
-    authService.resresh();
+    authService.refresh();
     const retrievedToken = authService.getToken();
     expect(retrievedToken).toBeNull();
   }));
 
   it('should return userId if exists',
       inject([AuthService], (authService: AuthService) => {
-    authService.resresh();
+    authService.refresh();
     const userId = authService.getUserId();
     expect(userId).toBeDefined();
     expect(userId).not.toBeNull();
@@ -69,14 +69,14 @@ describe('AuthService', () => {
   it('should return null if userId does not exists',
       inject([AuthService], (authService: AuthService) => {
     store = {};
-    authService.resresh();
+    authService.refresh();
     const userId = authService.getUserId();
     expect(userId).toBeNull();
   }));
 
   it('should return username if exists',
       inject([AuthService], (authService: AuthService) => {
-    authService.resresh();
+    authService.refresh();
     const username = authService.getUsername();
     expect(username).toBeDefined();
     expect(username).not.toBeNull();
@@ -86,7 +86,7 @@ describe('AuthService', () => {
   it('should return null if username does not exists',
       inject([AuthService], (authService: AuthService) => {
     store = {};
-    authService.resresh();
+    authService.refresh();
     const username = authService.getUsername();
     expect(username).toBeNull();
   }));
@@ -95,7 +95,7 @@ describe('AuthService', () => {
 
     it('should return true if token exists',
         inject([AuthService], (authService: AuthService) => {
-      authService.resresh();
+      authService.refresh();
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeTruthy();
     }));
@@ -103,7 +103,7 @@ describe('AuthService', () => {
     it('should return false if token does not exists',
         inject([AuthService], (authService: AuthService) => {
       store = {user: undefined};
-      authService.resresh();
+      authService.refresh();
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeFalsy();
     }));
