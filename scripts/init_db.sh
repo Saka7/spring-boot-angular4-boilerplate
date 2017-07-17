@@ -3,9 +3,9 @@
 db_name=test
 user_name=test
 user_password=test
-db_schema_file_name=$db_name""_db_schema.pg.sql
+db_schema_file_name=scripts/$db_name""_schema.pg.sql
 
-echo "=== Confirm user $user_name and database $db_name creation ==="
+echo "Confirm user $user_name and database $db_name creation: "
 
 psql -U postgres << EOF
 CREATE USER $user_name WITH ENCRYPTED PASSWORD '$user_password';

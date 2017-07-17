@@ -5,14 +5,10 @@ CREATE SEQUENCE hibernate_sequence
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE hibernate_sequence OWNER TO test;
-
 CREATE TABLE roles (
     id bigint PRIMARY KEY,
     label character varying(255)
 );
-
-ALTER TABLE roles OWNER TO test;
 
 CREATE TABLE users (
     id bigint PRIMARY KEY,
@@ -21,5 +17,3 @@ CREATE TABLE users (
     password character varying(255) NOT NULL,
     role_id bigint REFERENCES roles(id)
 );
-
-ALTER TABLE users OWNER TO test;

@@ -19,9 +19,16 @@ Back-end:
 - Boilerplate files
 - JWT authentication
 
+## Setup
+
+You can use `setup.sh` script to change name and version of the app and database connection properties.
+Just run `sh setup.sh` and follow the instructions.
+
 ## Build and Run
 
-First of all you need to configure database. Properties are located in `./backend/src/main/resources/application.properties` file. By default application is using PostgreSQL database(name: `test`, user: `test`, password: `test`).
+First of all you need to configure database. Properties are located in `./backend/src/main/resources/application.properties` file.
+
+> By default application is using PostgreSQL database(name: `test`, user: `test`, password: `test`).
 
 Also you need to configure JWT secret in file listed above.
 
