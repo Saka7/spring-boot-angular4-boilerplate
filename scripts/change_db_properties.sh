@@ -37,7 +37,6 @@ sed -i "s/\/$old_db_name/\/$db_name/" $app_properties_file
 sed -i "s/username\s*=\s*$old_db_user/username=$db_user/" $app_properties_file
 sed -i "s/password\s*=\s*$old_db_password/password=$db_password/" $app_properties_file
 
-
 if [ $? -eq 0 ]; then
   echo "Database $db_name and $db_user has been successfully changed"
   echo "====="

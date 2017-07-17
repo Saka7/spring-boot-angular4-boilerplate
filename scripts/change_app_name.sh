@@ -23,16 +23,16 @@ angular_cli_file=frontend/angular-cli.json
 build_gradle_file=backend/build.gradle
 
 # Update package.json file
-sed -i "s/\"name\":\s*$old_app_name/\"name\": $app_name/" $package_json_file
-sed -i "s/\"name\":\s*$old_app_version/\"name\": $app_version/" $package_json_file
+sed -i "s/$old_app_name/$app_name/" $package_json_file
+sed -i "s/$old_app_version/$app_version/" $package_json_file
 
 # Update angular cli file
-sed -i "s/\"name\":\s*$old_app_name/\"name\": $app_name/" $angular_cli_file
-sed -i "s/\"prefix\":\s*$old_app_name/\"prefix\": $app_name/" $angular_cli_file
+sed -i "s/$old_app_name/$app_name/" $angular_cli_file
+sed -i "s/$old_app_name/$app_name/" $angular_cli_file
 
 # Update gradle build file
-sed -i "s/baseName\s*=\s*'$old_app_name'/baseName = '$app_name'/" $build_gradle_file
-sed -i "s/version\s*=\s*'$old_app_version'/version = '$app_version'/" $build_gradle_file
+sed -i "s/baseName\s*=\s*'$old_app_name'/baseName='$app_name'/" $build_gradle_file
+sed -i "s/version\s*=\s*'$old_app_version'/version='$app_version'/" $build_gradle_file
 
 if [ $? -eq 0 ]; then
   echo "app name has been successfully changed to $app_name"

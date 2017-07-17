@@ -1,6 +1,6 @@
 {
   "project": {
-    "name": "app-name"
+    "name": "random"
   },
   "apps": [
     {
@@ -14,7 +14,7 @@
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "app-name",
+      "prefix": "random",
       "mobile": false,
       "styles": [
         "styles.css"

@@ -40,8 +40,8 @@ dependencies {
 }
 
 jar {
-  baseName = 'app-name'
-  version = '0.0.1'
+  baseName='app-name'
+  version='0.0.1'
 }
 
 jacoco {
