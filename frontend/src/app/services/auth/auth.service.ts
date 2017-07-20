@@ -35,7 +35,7 @@ export class AuthService {
   /**
   * Refreshes userId, username and token from sessionStorage
   */
-  public refresh() {
+  public refresh(): void {
     this.logout();
     const user = sessionStorage.getItem('user');
     if(user) {
@@ -49,7 +49,7 @@ export class AuthService {
   * @param email
   * @param password
   */
-  public signUp(username: string, email: string, password: string) {
+  public signUp(username: string, email: string, password: string): Observable<{}> {
 
     const requestParam = {
       email: email,
@@ -71,7 +71,7 @@ export class AuthService {
   * @param username
   * @param password
   */
-  public signIn(username: string, password: string) {
+  public signIn(username: string, password: string): Observable<{}> {
 
     const requestParam = {
       username: username,
@@ -90,7 +90,7 @@ export class AuthService {
   /**
   * Removes token and user details from sessionStorage and service's variables
   */
-  public logout() {
+  public logout(): void {
     sessionStorage.removeItem('user');
     this.token = null;
     this.username = null;
@@ -101,7 +101,7 @@ export class AuthService {
   * Refreshes token for the user with given token
   * @param token - which should be refreshed
   */
-  public refreshToken(token: string) {
+  public refreshToken(token: string): Observable<{}> {
     const requestParam = { token: this.token };
 
     return this.http.post(AuthService.REFRESH_TOKEN_URL, requestParam, this.generateOptions())
@@ -141,10 +141,11 @@ export class AuthService {
     return this.token;
   }
 
-  private saveToken(res: Response) {
-    let response = res.json() && res.json().token;
+  // Saves user details with token into sessionStorage as user item
+  private saveToken(res: Response): void {
+    const response = res.json() && res.json().token;
     if (response) {
-      let token = response;
+      const token = response;
       let claims = this.getTokenClaims(token);
       claims.token = token;
       sessionStorage.setItem('user', JSON.stringify(claims));
@@ -153,18 +154,21 @@ export class AuthService {
     }
   }
 
-  private saveUserDetails(user) {
+  // Saves user details into service properties
+  private saveUserDetails(user): void {
     this.token = user.token || '';
     this.username = user.sub || '';
     this.userId = user.id || 0;
   }
 
-  private getTokenClaims(token: string) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace('-', '+').replace('_', '/');
+  // Retrieves user details from token
+  private getTokenClaims(token: string): any {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
   }
 
+  // Generates Headers
   private generateOptions(): RequestOptions {
     let headers = new Headers();
     headers.append("Content-Type", 'application/json');
