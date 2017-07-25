@@ -29,14 +29,13 @@ export class AuthService {
   public static readonly REFRESH_TOKEN_URL = environment.apiUrl + "/api/auth/token/refresh";
   
   constructor(private http: Http) {
-    this.refresh();
+    this.refreshUserData();
   }
 
   /**
   * Refreshes userId, username and token from sessionStorage
   */
-  public refresh(): void {
-    this.logout();
+  public refreshUserData(): void {
     const user = sessionStorage.getItem('user');
     if(user) {
       this.saveUserDetails(JSON.parse(user));
