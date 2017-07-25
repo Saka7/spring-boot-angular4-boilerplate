@@ -1,11 +1,11 @@
 {
   "project": {
-    "name": "random"
+    "name": "app-name"
   },
   "apps": [
     {
       "root": "src",
-      "outDir": "../backend/src/main/resources/public",
+      "outDir": "dist",
       "assets": [
         "assets",
         "favicon.png"
@@ -14,7 +14,7 @@
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "random",
+      "prefix": "app-name",
       "mobile": false,
       "styles": [
         "styles.css"

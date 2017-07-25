@@ -5,12 +5,16 @@
   "angular-cli": {},
   "scripts": {
     "build": "ng build --prod --output-hashing none",
+    "build:prod": "npm run precache && npm run build && npm run copy",
     "start": "ng serve",
+    "start:prod": "npm run precache && ng serve --prod",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "test:prod": "karma start ./karma.conf.js --single-run",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor"
+    "precache": "sw-precache --root=dist --config=sw-precache.config.js",
+    "e2e": "protractor",
+    "copy": "cp -r dist ../backend/src/main/resources/public"
   },
   "dependencies": {
     "@angular/common": ">=4.2.2 <5.0.0",
@@ -23,6 +27,7 @@
     "@angular/router": ">=4.2.2 <5.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
+    "sw-precache": "^5.2.0",
     "zone.js": "^0.7.6"
   },
   "devDependencies": {

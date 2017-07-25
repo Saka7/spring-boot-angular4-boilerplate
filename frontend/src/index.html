@@ -6,11 +6,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="manifest" href="assets/manifest.json" />
 </head>
 <body>
   <app-root>
     <div class="loader">Loading...</div>
   </app-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.info('Service Worker registered');
+      }).catch(function(err) {
+        console.info('Service Worker registration failed: ', err);
+      });
+    }
+  </script>
 </body>
 </html>

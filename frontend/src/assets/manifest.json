@@ -1,0 +1,12 @@
+{
+  "name": "app-name",
+  "short_name": "app-name",
+  "theme_color": "#212121",
+  "background_color": "#212121",
+  "display": "standalone",
+  "description": "Sample description",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [],
+  "splash_pages": null
+}
