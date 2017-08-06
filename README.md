@@ -1,5 +1,7 @@
 # Spring Boot + Angular 4 Boilerplate
 
+![spring-boot-angular4-boilerplate](https://raw.githubusercontent.com/Saka7/spring-boot-angular4-boilerplate/master/frontend/src/assets/images/favicon.png)
+
 [![Code Climate](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
 [![Issue Count](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate/badges/issue_count.svg)](https://codeclimate.com/github/Saka7/spring-boot-angular4-boilerplate)
 
@@ -10,13 +12,12 @@ Quick start for Spring Boot + Angular 4 projects with JWT auth
 Front-end:
 
 - angular-cli boilerplate files
-- Authentication service
+- JWT authentication service
 
 Back-end:
 
-- Embedded tomcat server
-- Gradle build file
-- Boilerplate files
+- gradle build file
+- boilerplate files
 - JWT authentication
 
 ## Setup
@@ -26,27 +27,34 @@ Just run `sh setup.sh` and follow the instructions.
 
 ## Build and Run
 
-First of all you need to configure database. Properties are located in `./backend/src/main/resources/application.properties` file.
+First of all you need to configure the database. Properties are located in `./backend/src/main/resources/application.properties` file.
 
 > By default application is using PostgreSQL database(name: `test`, user: `test`, password: `test`).
 
 Also you need to configure JWT secret in file listed above.
 
-1. Run `npm install --prefix ./frontend` to install front-end dependencies.
-2. Run `npm run build --prefix ./frontend` to build angular application.
+1. Run `npm install --prefix frontend` to install front-end dependencies.
+2. Run `npm run build:prod --prefix frontend` to build angular application.
 3. Run `./init_db` to create database, dbuser and dump default schema.
-4. Run `gradle -p ./backend build` to build a spring boot application.
-5. Run `gradle -p ./backend bootRun` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server. By default server will be running on port `8080`.
+4. Run `gradle build -p backend` to build a spring boot application.
+5. Run `gradle bootRun -p backend ` or `java -jar backend/build/libs/app-name-[version].jar` to start spring boot application on embedded server.
 
-> `npm start --prefix ./frontend` to start front-end server for development.
+> By default server will be running on port `8080`.
+
+
+## Depelopment
+
+- `npm start --prefix frontend` to start front-end server for development.
+- `npm run start:prod --prefix frontend` to start front-end server with service-workers.
+- `gradle bootRun -p backend ` to start spring boot application on embedded server.
 
 > By default server will be running on port `4200`
 
 ## Testing
 
-- `npm test --prefix ./frontend` - to run front-end unit tests.
-- `npm run e2e --prefix ./frontend` - to run end to end tests.
-- `gradle -p ./backend test` - to run server tests.
+- `npm test --prefix frontend` - to run front-end unit tests.
+- `npm run e2e --prefix frontend` - to run end to end tests.
+- `gradle test -p backend` - to run server tests.
 
 ## Technologies used
 
@@ -67,3 +75,5 @@ Also you need to configure JWT secret in file listed above.
 - [karma 1.0](https://karma-runner.github.io/1.0/index.html)
 - [protractor 4](http://www.protractortest.org/#/)
 
+## License
+spring-boot-angular4-boilerplate is released under the [MIT License](https://opensource.org/licenses/MIT).
