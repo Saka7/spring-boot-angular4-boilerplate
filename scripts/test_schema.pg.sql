@@ -17,3 +17,5 @@ CREATE TABLE users (
     password character varying(255) NOT NULL,
     role_id bigint REFERENCES roles(id)
 );
+
+INSERT INTO roles (id, label) VALUES(1, 'USER')

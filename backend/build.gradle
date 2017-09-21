@@ -24,17 +24,17 @@ repositories {
 }
 
 dependencies {
-  compile('org.springframework.boot:spring-boot-starter-web')
-  compile('org.springframework.boot:spring-boot-starter-data-jpa')
-  compile('org.springframework.boot:spring-boot-starter-security')
-  compile('org.springframework.boot:spring-boot-devtools:1.5.1.RELEASE')
+  compile('org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE')
+  compile('org.springframework.boot:spring-boot-starter-data-jpa:1.5.2.RELEASE')
+  compile('org.springframework.boot:spring-boot-starter-security:1.5.2.RELEASE')
+  compile('org.springframework.boot:spring-boot-devtools:1.5.2.RELEASE')
   compile('io.jsonwebtoken:jjwt:0.7.0')
   compile('org.projectlombok:lombok:1.16.12')
 
   runtime('org.postgresql:postgresql:42.1.1')
   
-  testCompile('org.springframework.boot:spring-boot-starter-test')
-  testCompile("junit:junit")
+  testCompile('org.springframework.boot:spring-boot-starter-test:1.5.2.RELEASE')
+  testCompile("junit:junit:4.12")
 
   testRuntime('com.h2database:h2:1.4.193')
 }
