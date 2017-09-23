@@ -98,9 +98,9 @@ public class AuthController extends BaseController {
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
-        String name = authenticationRequest.getUsername();
-        String email = authenticationRequest.getEmail();
-        String password = authenticationRequest.getPassword();
+        final String name = authenticationRequest.getUsername();
+        final String email = authenticationRequest.getEmail();
+        final String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
         Role role  = new Role(1L, "USER");
         userService.save(new User(0L, name, email, password, role));
@@ -135,8 +135,8 @@ public class AuthController extends BaseController {
     public ResponseEntity getAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
             throws AuthenticationException {
 
-        String name = authenticationRequest.getUsername();
-        String password = authenticationRequest.getPassword();
+        final String name = authenticationRequest.getUsername();
+        final String password = authenticationRequest.getPassword();
         LOG.info("[POST] GETTING TOKEN FOR User " + name);
         JwtUser userDetails;
 
