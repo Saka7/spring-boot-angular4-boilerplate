@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.entity.Role;
 import com.app.entity.User;
 import com.app.exception.InvalidPasswordException;
+import com.app.exception.UserAlreadyExistsException;
 import com.app.exception.UserNotFoundException;
 import com.app.security.auth.JwtAuthenticationRequest;
 import com.app.security.auth.JwtAuthenticationResponse;
@@ -102,6 +103,15 @@ public class AuthController extends BaseController {
         final String email = authenticationRequest.getEmail();
         final String password = authenticationRequest.getPassword();
         LOG.info("[POST] CREATING TOKEN FOR User " + name);
+
+        if(this.userService.findByName(name) != null) {
+           throw new UserAlreadyExistsException();
+        }
+
+        if(this.userService.findByEmail(email) != null) {
+            throw new UserAlreadyExistsException();
+        }
+
         Role role  = new Role(1L, "USER");
         userService.save(new User(0L, name, email, password, role));
         JwtUser userDetails;
