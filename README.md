@@ -42,7 +42,7 @@ Also you need to configure JWT secret in file listed above.
 > By default server will be running on port `8080`.
 
 
-## Depelopment
+## Development
 
 - `npm start --prefix frontend` to start front-end server for development.
 - `npm run start:prod --prefix frontend` to start front-end server with service-workers.
